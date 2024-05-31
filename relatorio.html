@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Vendas</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .dashboard {
+            width: 300px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .dashboard-item {
+            margin-bottom: 10px;
+        }
+        .dashboard-item label {
+            font-weight: bold;
+        }
+        .dashboard-item span {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Relatório de Vendas</h1>
+    <div class="dashboard">
+        <div class="dashboard-item">
+            <label>Vendas Totais do Mês:</label>
+            <span id="vendasTotaisMes">0</span>
+        </div>
+        <div class="dashboard-item">
+            <label>Meta Diária:</label>
+            <span id="metaDiaria">1200</span>
+        </div>
+        <div class="dashboard-item">
+            <label>Meta até o Momento:</label>
+            <span id="metaAteMomento">0</span>
+        </div>
+        <div class="dashboard-item">
+            <label>Meta Batida (em %):</label>
+            <span id="metaBatida">0%</span>
+        </div>
+        <div class="dashboard-item">
+            <label>Vendas Pagas:</label>
+            <span id="vendasPagas">0</span>
+        </div>
+        <div class="dashboard-item">
+            <label>Vendas Aguardando Pagamento:</label>
+            <span id="vendasAguardando">0</span>
+        </div>
+    </div>
+    <button onclick="window.location.href = 'index.html';">Voltar</button>
+    <script>
+        const vendas = JSON.parse(localStorage.getItem('vendas')) || [];
+        const vendasPagas = vendas.filter(venda => venda.statusPagamento === 'Pago');
+        const vendasAguardando = vendas.filter(venda => venda.statusPagamento === 'Aguardando');
+        const metaDiaria = 1200;
+        const vendasAteMomento = vendasPagas.reduce((total, venda) => total + parseInt(venda.planoPacote), 0);
+        const metaAteMomento = vendasAteMomento >= metaDiaria ? metaDiaria : vendasAteMomento;
+        const metaBatida = Math.floor((vendasAteMomento / (metaDiaria * new Date().getDate())) * 100);
+        
+        document.getElementById('vendasTotaisMes').innerText = vendasAteMomento;
+        document.getElementById('metaDiaria').innerText = metaDiaria;
+        document.getElementById('metaAteMomento').innerText = metaAteMomento;
+        document.getElementById('metaBatida').innerText = metaBatida + '%';
+        document.getElementById('vendasPagas').innerText = vendasPagas.length;
+        document.getElementById('vendasAguardando').innerText = vendasAguardando.length;
+    </script>
+</body>
+</html>

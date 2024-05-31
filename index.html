@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Vendas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center; /* Alinha os elementos centralmente */
+        }
+        .logo {
+            margin-bottom: 20px;
+        }
+        .logo img {
+            width: 200px; /* Defina a largura desejada para a imagem */
+            display: block; /* Garante que a imagem fique centralizada */
+            margin: 0 auto; /* Centraliza a imagem horizontalmente */
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        .button-container button {
+            display: block; /* Faz os botões ficarem um abaixo do outro */
+            width: 100%; /* Faz os botões ocuparem toda a largura disponível */
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-bottom: 10px; /* Espaçamento entre os botões */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button-container button:hover {
+            background-color: #45a049;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="./logo_wow-gestao-de-ativos_PooOJZ.png" alt="Logo da Empresa">
+        </div>
+        <h1>Sistema de Vendas</h1>
+        <div class="button-container">
+            <button onclick="window.location.href = 'registro.html';">Registrar Venda</button>
+            <button onclick="window.location.href = 'relatorio.html';">Relatório de Vendas</button>
+            <button onclick="window.location.href = 'meta_diaria.html';">Meta Diária</button>
+            <button onclick="window.location.href = 'gerenciar_vendas.html';">Gerenciar Vendas</button>
+        </div>
+    </div>
+</body>
+</html>

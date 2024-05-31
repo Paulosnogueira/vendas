@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meta Diária - Junho</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .calendario {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            margin-top: 20px;
+        }
+        .dia {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+            background-color: #ddd;
+            border: 1px solid #ccc;
+            padding: 10px;
+            position: relative;
+        }
+        .dia:not(:last-child) {
+            margin-right: 5px;
+        }
+        .meta-baixa {
+            background-color: #ff9999;
+        }
+        .meta-media {
+            background-color: #ffff99;
+        }
+        .meta-alta {
+            background-color: #99ff99;
+        }
+        .vendas-np {
+            position: absolute;
+            bottom: 5px;
+            left: 5px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Meta Diária - Junho</h1>
+    <div class="calendario">
+        <!-- Preenchido dinamicamente com JavaScript -->
+    </div>
+
+    <button onclick="window.location.href = 'index.html';">Voltar</button>
+
+    <script>
+        const metaDiaria = 1200;
+        const vendas = JSON.parse(localStorage.getItem('vendas')) || [];
+        const vendasAguardando = vendas.filter(venda => venda.statusPagamento === 'Aguardando');
+
+        const diasNoMes = 30; // Supondo que junho tem 30 dias
+        const vendasPorDia = new Array(diasNoMes).fill(metaDiaria);
+
+        const diasDaSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+
+        // Preencher o calendário
+        const calendario = document.querySelector('.calendario');
+        for (let dia = 1; dia <= diasNoMes; dia++) {
+            const valorMeta = vendasPorDia[dia - 1];
+            const vendaDoDia = vendas.filter(venda => new Date(venda.dataVenda).getDate() === dia);
+            const valorVendasDia = vendaDoDia.reduce((total, venda) => total + parseInt(venda.planoPacote), 0);
+            const percentualMeta = (valorVendasDia / metaDiaria) * 100;
+            const diaDaSemana = diasDaSemana[new Date(2024, 5, dia).getDay()]; // 2024, 5 é junho de 2024
+
+            const diaElemento = document.createElement('div');
+            diaElemento.classList.add('dia');
+            diaElemento.innerHTML = `
+                <div>${dia}</div>
+                <div>${diaDaSemana}</div>
+                <div>R$ ${valorMeta}</div>
+                <div class="vendas-np">
+                    ${vendaDoDia.length > 0 ? 'Vendas Não Pagas:' : ''}
+                    <ul>
+                        ${vendaDoDia.map(venda => `<li>${venda.planoPacote} - ${venda.cliente}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+
+            if (percentualMeta >= 100) {
+                diaElemento.classList.add('meta-alta');
+            } else if (percentualMeta >= 50) {
+                diaElemento.classList.add('meta-media');
+            } else {
+                diaElemento.classList.add('meta-baixa');
+            }
+
+            calendario.appendChild(diaElemento);
+        }
+    </script>
+</body>
+</html>

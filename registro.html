@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Vendas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .mensagem {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Registro de Vendas</h1>
+    <form id="formRegistro">
+        <div class="form-group">
+            <label for="vindi">Link da Vindi:</label>
+            <input type="text" id="vindi" placeholder="Insira o link da Vindi" required>
+        </div>
+        <div class="form-group">
+            <label for="cliente">Nome do Cliente:</label>
+            <input type="text" id="cliente" placeholder="Insira o nome do cliente" required>
+        </div>
+        <div class="form-group">
+            <label for="telefone">Telefone do Cliente:</label>
+            <input type="text" id="telefone" placeholder="Insira o telefone do cliente" required>
+        </div>
+        <div class="form-group">
+            <label for="dataVenda">Data da Venda:</label>
+            <input type="text" id="dataVenda" placeholder="Insira a data da venda (DD/MM/AAAA)" required>
+        </div>
+        <div class="form-group">
+            <label for="dataPagamento">Data do Pagamento:</label>
+            <input type="text" id="dataPagamento" placeholder="Insira a data do pagamento (DD/MM/AAAA)">
+        </div>
+        <div class="form-group">
+            <label for="statusPagamento">Status do Pagamento:</label>
+            <select id="statusPagamento" required>
+                <option value="Aguardando">Aguardando Pagamento</option>
+                <option value="Pago">Pago</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="planoPacote">Plano ou Pacote:</label>
+            <select id="planoPacote" required>
+                <option value="Agil Mensal">Agil Mensal</option>
+                <option value="Agil Semestral">Agil Semestral</option>
+                <option value="Agil Anual">Agil Anual</option>
+                <option value="Divertida Mensal">Divertida Mensal</option>
+                <option value="Divertida Semestral">Divertida Semestral</option>
+                <option value="Divertida Anual">Divertida Anual</option>
+                <option value="Surpreendente Mensal">Surpreendente Mensal</option>
+                <option value="Surpreendente Semestral">Surpreendente Semestral</option>
+                <option value="Surpreendente Anual">Surpreendente Anual</option>
+                <option value="Pacote Mix">Pacote Mix</option>
+                <option value="Pacote Agil">Pacote Agil</option>
+                <option value="Pacote Divertida">Pacote Divertida</option>
+                <option value="Pacote Surpreendente">Pacote Surpreendente</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="valorVenda">Valor da Venda:</label>
+            <input type="text" id="valorVenda" placeholder="Insira o valor da venda" required>
+        </div>
+        <input type="submit" value="Registrar Venda">
+    </form>
+
+    <div class="mensagem" id="mensagem"></div>
+
+    <button onclick="window.location.href = 'index.html';">Voltar</button>
+
+    <script>
+        const formRegistro = document.getElementById('formRegistro');
+        const mensagem = document.getElementById('mensagem');
+
+        formRegistro.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const vindi = document.getElementById('vindi').value;
+            const cliente = document.getElementById('cliente').value;
+            const telefone = document.getElementById('telefone').value;
+            const dataVenda = document.getElementById('dataVenda').value;
+            const dataPagamento = document.getElementById('dataPagamento').value;
+            const statusPagamento = document.getElementById('statusPagamento').value;
+            const planoPacote = document.getElementById('planoPacote').value;
+            const valorVenda = document.getElementById('valorVenda').value;
+
+            if (statusPagamento === 'Pago' && !dataPagamento) {
+                mensagem.textContent = 'Por favor, informe a data do pagamento.';
+                return;
+            }
+
+            // Aqui você pode adicionar o código para registrar a venda
+            // Por exemplo, você pode armazenar os dados em localStorage ou enviá-los para um servidor
+
+            mensagem.textContent = 'Venda registrada com sucesso!';
+            formRegistro.reset();
+        });
+    </script>
+</body>
+</html>

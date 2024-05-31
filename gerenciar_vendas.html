@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Vendas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto 20px auto;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f2f2f2;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gerenciar Vendas</h1>
+    <form id="filtroForm">
+        <div class="form-group">
+            <label for="dataInicio">Data de Início:</label>
+            <input type="date" id="dataInicio">
+        </div>
+        <div class="form-group">
+            <label for="dataFim">Data de Fim:</label>
+            <input type="date" id="dataFim">
+        </div>
+        <div class="form-group">
+            <label for="valorMin">Valor Mínimo:</label>
+            <input type="number" id="valorMin" min="0" step="0.01">
+        </div>
+        <div class="form-group">
+            <label for="valorMax">Valor Máximo:</label>
+            <input type="number" id="valorMax" min="0" step="0.01">
+        </div>
+        <div class="form-group">
+            <label for="planoPacote">Plano ou Pacote:</label>
+            <select id="planoPacote">
+                <option value="">Todos</option>
+                <option value="Agil Mensal">Agil Mensal</option>
+                <option value="Agil Semestral">Agil Semestral</option>
+                <option value="Agil Anual">Agil Anual</option>
+                <!-- Adicione outras opções aqui -->
+            </select>
+        </div>
+        <input type="submit" value="Filtrar">
+    </form>
+
+    <table id="tabelaVendas">
+        <thead>
+            <tr>
+                <th>Link Vindi</th>
+                <th>Cliente</th>
+                <th>Telefone</th>
+                <th>Data Venda</th>
+                <th>Data Pagamento</th>
+                <th>Status Pagamento</th>
+                <th>Plano/Pacote</th>
+                <th>Valor Venda</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- As vendas serão preenchidas dinamicamente aqui -->
+        </tbody>
+    </table>
+
+    <script>
+        // Aqui você pode adicionar o script para filtrar e exibir as vendas
+    </script>
+</body>
+</html>
